@@ -1,0 +1,31 @@
+import { Express, Request } from 'express';
+import Websocket from 'ws';
+import queryString from 'query-string';
+
+export default (expressServer: Express) => {
+    const websocketServer = Websocket.server({
+        noServer: true,
+        path: "./websockets",
+    });
+
+    expressServer.on("upgrade", (request: Request, socket, head) => {
+        websocketServer.handleUpgrade(request, socket, head, (websocket) => {
+            websocketServer.emit("connection", websocket, request); 
+        })
+    });
+
+    websocketServer.on("connection", function connection(websocketConnection: { on: (arg0: string, arg1: (message: any) => void) => void; }, connectionRequest: { url: { split: (arg0: string) => [any, any]; }; }) {
+        const [_path, params] = connectionRequest?.url?.split("?"); 
+        const connectionParams = queryString.parse(params); 
+
+        console.log(connectionParams);
+
+        websocketConnection.on("message", (message) => {
+            const parsedMessage = JSON.parse(message);
+            console.log(parsedMessage); 
+            websocketClient.send(JSON.stringify({ message: `No quarter.` }));
+        });
+    }); 
+
+    return websocketServer; 
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Websocket Demo</title>
+    </head>
+
+    <style>
+        body {
+            height: 75vh;
+            width: 92.5%; 
+            background-color: rgb(255, 255, 255, 1.0);
+            padding: 2rem; 
+            margin: 1rem;
+            border: 0.1rem solid black;
+            border-radius: 0.35rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            overflow-x: hidden;
+            overflow-y: hidden; 
+            float: right;
+        }
+        input {
+            background-color: #fff;
+            color: #000;
+            padding: 0.5rem;
+            margin: 0.5rem; 
+            border: 0.1rem solid #000; 
+            border-radius: 0.35rem;
+        }
+        button {
+            background-color: #fff;
+            color: #000;
+            font-size: 1rem;
+            line-height: 1;
+            padding: 0.5rem;
+            margin: 0.5rem; 
+            border: 0.1rem solid #000;
+            border-radius: 0.35rem; 
+        }
+        button:hover {
+            background-color: rgba(0,0,0,1.0);
+            color: rgba(255,255,255,0.8);
+            border-width: 0.15rem;
+        }
+        p {
+            margin: 0.15rem;
+            padding: 0.25rem;
+            font-size: 1rem; 
+            line-height: 1;
+            border: 0.1rem solid black;
+            border-radius: 0.35rem;
+        }
+        #message {
+            width: 100%; 
+        }
+        #name {
+            width: 200px;
+            float: left; 
+        }
+        #messages {
+            width: 100%;
+            height: 100%; 
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: flex-start;
+            align-items: flex-end;
+            gap: 0.05em;
+            padding: 0.5rem;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            align-self: baseline;
+        }
+        .controlgroup {
+            height: 200px;
+            width: 100%; 
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.25rem;   
+            padding: 0;
+            margin: 0.25rem;
+        }
+
+    </style>
+
+    <body>
+        <input 
+            id="name" 
+            autocomplete="off" 
+            placeholder="@anonymous" 
+        />
+        <div id="messages"></div>
+        <div class="controlgroup">
+            <input 
+                id="message" 
+                autocomplete="off" 
+                placeholder="Start typing a message" 
+            />
+            <button 
+                id="send" 
+                onClick="fire()"
+            > 
+                Send 
+            </button>
+        </div>
+
+        <script>
+            const getElement = (id) => document.getElementById(id);
+
+            const decode = (data) => {
+                if(!data) return;
+
+                let decodedString = "";
+                data.map((datum) => {
+                    const newChar = String.fromCharCode(datum);
+                    decodedString += newChar; 
+                })
+                return decodedString; 
+            }
+
+            const addMessage = (message) => {
+                const pTag = document.createElement('p');
+                pTag.appendChild(document.createTextNode(decode(message.data)));
+                getElement('messages').appendChild(pTag);
+            };
+
+            const fire = () => {
+                const username = getElement('name').value || 'anonymous';
+                ws.send(`@${username}: ${getElement('message').value}`);
+                getElement('message').value = ''; 
+            }
+
+            const ws = new WebSocket('ws://localhost:3030');
+
+            ws.onopen = () => {
+                console.log('Now connected'); 
+            };
+
+            ws.onmessage = (event) => {
+                console.log('recieved a message');
+                const messages = JSON.parse(event.data);
+                messages.forEach(addMessage);
+            };
+        </script>
+    </body>
+</html>

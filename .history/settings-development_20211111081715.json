@@ -1,0 +1,27 @@
+{
+    "authentication": {
+      "token": "abcdefghijklmnopqrstuvwxyz1234567890"
+    },
+    "databases": {
+      "mongodb": {
+        "uri": "mongodb://127.0.0.1/app"
+      },
+      "redis": {
+        "uri": ""
+      }
+    },
+    "smtp": {
+      "host": "",
+      "port": 587,
+      "username": "",
+      "password": ""
+    },
+    "admin": {
+      "email": "sanshitsagar@gmail.co",
+      "name": "CheatCode"
+    },
+    "urls": {
+      "api": "http://localhost:5001",
+      "app": "http://localhost:5000"
+    }
+}
