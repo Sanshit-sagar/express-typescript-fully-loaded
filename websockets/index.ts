@@ -21,7 +21,8 @@ function generateMessageString(message: string) {
             raw: message,
             parsed: `${JSON.parse(message)}`,
         },
-        response: `Lovin it.`
+        response: `Now isn't that lovely!`,
+        timestamp: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
     });
 }
 
