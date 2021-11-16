@@ -2,7 +2,7 @@ import cluster from "cluster";
 import os from "os";
 import logger from "./logger";
 
-export default (callback = null) => {
+export default (callback: any = null) => {
     const cpus = os.cpus().length;
 
     if(cluster.isPrimary) { // === cluster.isMaster

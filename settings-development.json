@@ -1,31 +1,37 @@
 {
     "authentication": {
-      "token": "abcdefghijklmnopqrstuvwxyz1234567890"
+        "token": "abcdefghijklmnopqrstuvwxyz1234567890"
     },
     "session": {
         "secret": "ashdfjhasdlkjfhalksdjhflak"
     },
     "databases": {
-      "mongodb": {
-        "uri": "mongodb+srv://sanshit:ssag9848@cluster0.11noz.mongodb.net/test?retryWrites=true&w=majority",
-        "realmAppId": "poser-cpkrs",
-      },
-      "redis": {
-        "uri": ""
-      }
+        "mongodb": {
+            "username": "sanshit",
+            "password": "ssag9848",
+            "uri": "mongodb+srv://sanshit:ssag9848@cluster0.11noz.mongodb.net/test?retryWrites=true&w=majority",
+            "realm": {
+                "appId": "poser-cpkrs",
+                "publicKey": "exmsxrnr",
+                "privateKey": "63557970-79a8-4d5a-80e4-9b0909e1048e"
+            }
+        },
+        "redis": {
+            "uri": ""
+        }
     },
     "smtp": {
-      "host": "",
-      "port": 587,
-      "username": "",
-      "password": ""
+        "host": "",
+        "port": 587,
+        "username": "",
+        "password": ""
     },
     "admin": {
-      "email": "sanshit.sagar@gmail.com",
-      "name": "Sanshit Sagar"
+        "email": "sanshit.sagar@gmail.com",
+        "name": "Sanshit Sagar"
     },
     "urls": {
-      "app": "http://localhost:3000",
-      "api": "http://localhost:3001"
+        "app": "http://localhost:3000",
+        "api": "http://localhost:3001"
     }
 }

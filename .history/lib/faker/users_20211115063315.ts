@@ -1,5 +1,0 @@
-import {
-    createUser,
-    createAddress,
-    createHackerDetails
-}
