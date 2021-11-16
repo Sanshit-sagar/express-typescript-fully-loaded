@@ -1,0 +1,27 @@
+{
+    "authentication": {
+      "token": "abcdefghijklmnopqrstuvwxyz1234567890"
+    },
+    "databases": {
+      "mongodb": {
+        "uri": "mongodb+srv://sanshit:ssag9848@cluster0.11noz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+      },
+      "redis": {
+        "uri": ""
+      }
+    },
+    "smtp": {
+      "host": "",
+      "port": 587,
+      "username": "",
+      "password": ""
+    },
+    "admin": {
+      "email": "sanshit.sagar@gmail.com",
+      "name": "Sanshit Sagar"
+    },
+    "urls": {
+      "app": "http://localhost:3000",
+      "api": "http://localhost:3001"
+    }
+}
