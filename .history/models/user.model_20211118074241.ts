@@ -13,7 +13,6 @@ interface IUser {
 	password: string;
 
     comparePassword: comparePasswordFunction;
-    gravatar: (size: number) => string;
 }
 
 type UserDocument = Document & IUser;
@@ -115,6 +114,7 @@ usersSchema.methods.comparePassword = comparePassword;
 
 /**
  * Helper method for getting a user's gravatar.
+ * 
  */
  usersSchema.methods.gravatar = function(size: number = 200): string {
     if(!this.email) {

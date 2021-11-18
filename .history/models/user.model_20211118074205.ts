@@ -13,7 +13,6 @@ interface IUser {
 	password: string;
 
     comparePassword: comparePasswordFunction;
-    gravatar: (size: number) => string;
 }
 
 type UserDocument = Document & IUser;
@@ -27,8 +26,9 @@ type UserInput = {
 
 export const comparePassword: comparePasswordFunction = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, (err: Error, isMatch: boolean) => {
-        cb(err, isMatch); 
-    });
+            cb(err, isMatch); 
+        }
+    );
 } 
 
 const usersSchema = new Schema<UserDocument>({
@@ -113,8 +113,12 @@ const usersSchema = new Schema<UserDocument>({
 
 usersSchema.methods.comparePassword = comparePassword;
 
+
 /**
  * Helper method for getting a user's gravatar.
+ * 
+ * @param size 
+ * @returns string
  */
  usersSchema.methods.gravatar = function(size: number = 200): string {
     if(!this.email) {

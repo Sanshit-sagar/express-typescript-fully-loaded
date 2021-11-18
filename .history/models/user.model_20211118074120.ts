@@ -13,7 +13,6 @@ interface IUser {
 	password: string;
 
     comparePassword: comparePasswordFunction;
-    gravatar: (size: number) => string;
 }
 
 type UserDocument = Document & IUser;
@@ -36,8 +35,7 @@ const usersSchema = new Schema<UserDocument>({
         type: Schema.Types.String, 
         required: [
             true, 
-            "The firstName field cannot be empty"
-        ],
+            "The firstName field cannot be empty"],
         minLength: [
             1, 
             "The firstName field must contain atleast 1 character"
@@ -113,8 +111,12 @@ const usersSchema = new Schema<UserDocument>({
 
 usersSchema.methods.comparePassword = comparePassword;
 
+
 /**
  * Helper method for getting a user's gravatar.
+ * 
+ * @param size 
+ * @returns string
  */
  usersSchema.methods.gravatar = function(size: number = 200): string {
     if(!this.email) {
