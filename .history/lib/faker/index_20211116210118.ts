@@ -1,7 +1,0 @@
-
-
-
-
-const fakeModelFactory = (modelName: FakeModels) => {
-
-}

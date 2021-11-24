@@ -9,7 +9,8 @@ const mongooseConnectionOptions: ConnectionOptions = {
     useNewUrlParser: true, 
     useFindAndModify: false, 
     useCreateIndex: true, 
-    useUnifiedTopology: true 
+    useUnifiedTopology: true,
+    ssl: process.env.NODE_ENV === "production",
 };
 
 const connectToMongoDb = async (): Promise<void> => {

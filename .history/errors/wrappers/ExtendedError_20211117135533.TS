@@ -1,5 +1,0 @@
-
-
-class ExtendedError extends Error {
-    
-}

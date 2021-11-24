@@ -14,7 +14,7 @@ import newPoser from '../lib/faker/newPoser'
  const createPoser = catchAsync(async (_req: Request, res: Response, next: NextFunction) => {
     const poser: PoserInput = newPoser();
     const createdPoser = await PoserModel.create(poser);
-    res.status(201).json({ data: createdPoser });
+    return res.status(201).json({ data: createdPoser });
 }); 
 
 /**
@@ -30,7 +30,7 @@ const getAllPosers = catchAsync(async (req: Request, res: Response, next: NextFu
 
     const count = Number(parseInt(String(limit)))
     const posers = await PoserModel.find().limit(count).sort(sort).exec();
-    res.status(200).json({ posers })
+    return res.status(200).json({ posers })
 });
 
 
@@ -46,7 +46,7 @@ const getPoserById = catchAsync(async (req: Request, res: Response, next: NextFu
     if(!poser) {
         throw new Error(`Cannot find poser with id: ${id}`); 
     } else {
-        res.status(200).json({ poser })
+        return res.status(200).json({ poser })
     }
 }); 
 
@@ -62,16 +62,17 @@ const updatePoser = catchAsync(async (req: Request, res: Response, next: NextFun
     const poser = await PoserModel.findOne({ _id: id });
 
     if(!poser) {
-        res.status(404).json({ message: `Poser with id: ${id} not found.`});
+        return res.status(404).json({ message: `Poser with id: ${id} not found.`});
     }
 
     if(!firstName || !lastName || !userName || !email) {
-        res.status(422).json({ message: `The fields firstName, lastName, userName and email are required` });
+        return res.status(422).json({ message: `The fields firstName, lastName, userName and email are required` });
     }
 
     await PoserModel.updateOne({ _id: id }, { firstName, lastName, userName }); 
     const updatedPoser = await PoserModel.findById(id, { firstName, lastName, userName }); 
-    res.status(202).json({ updatedPoser })
+    
+    return res.status(202).json({ updatedPoser })
 });
 
 

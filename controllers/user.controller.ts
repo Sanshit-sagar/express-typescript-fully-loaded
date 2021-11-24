@@ -1,8 +1,9 @@
 
 import { NextFunction, Request, Response } from 'express'
 
-import { User, UserDocument } from '../models/user.model' 
-import catchAsync from '../lib/catchAsync'
+import { User, UserDocument } from '../models/user.model';
+
+import catchAsync from '../lib/catchAsync';
 import ExtendedError from '../errors/wrappers/ExtendedError';
 
 

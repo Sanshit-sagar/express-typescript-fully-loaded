@@ -30,7 +30,6 @@ const getAllRoles = async (req: Request, res: Response) => {
     res.status(200).json({ data: allRoles });
 }
 
-
 /**
  * 
  */
@@ -40,7 +39,9 @@ const getRole = async (req: Request, res: Response) => {
     const role = await Role.findOne({ _id: id }); 
 
     if(!role) {
-        res.status(404).json({  message: `Role with id: ${id} not found.` })
+        res.status(404).json({  
+            message: `Role with id: ${id} not found.`
+        })
     }
 
     res.status(200).json({ data: role });
@@ -56,20 +57,22 @@ const updateRole = async (req: Request, res: Response) => {
     const role = await Role.findOne({ _id: id });
 
     if(!role) {
-        res.status(404).json({ message: `Role with id: ${id} not found.`});
+        res.status(404).json({ 
+            message: `Role with id: ${id} not found.`
+        });
     }
 
     if(!name || !description) {
-        res.status(422).json({ message: `The fields name and description are required` });
+        res.status(422).json({ 
+            message: `The fields name and description are required` 
+        });
     }
 
     await Role.updateOne({ _id: id }, { name, description }); 
-
     const roleUpdated = await Role.findById(id, { name, description }); 
 
     return res.status(200).json({ data: roleUpdated });
 }
-
 
 /**
  * 

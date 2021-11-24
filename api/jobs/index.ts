@@ -70,13 +70,3 @@ jobsRouter.use(function(req: Request, res: Response, next: NextFunction) {
 })
 
 export default jobsRouter; 
-
-
-
-
-// export default async (app: Express) => {
-//     app.use('/api/jobs', (req: Request, res: Response) => {
-      
-
-//            }); 
-// }
