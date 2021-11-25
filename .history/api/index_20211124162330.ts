@@ -11,4 +11,3 @@ export default async (app: Express) => {
     app.use('/api/v1/users', userRouter); 
     app.use('/api/v1/posers', poserRouter);
 };
-
